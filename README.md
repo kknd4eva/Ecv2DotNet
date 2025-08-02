@@ -2,6 +2,10 @@
 
 Ecv2DotNet is a .NET library that provides a simple way to verify the integrity of payloads that are signed using the Google ECv2SigningOnly protocol. This library is used for validating signatures from Google Pay and Google Wallet callback APIs.
 
+## Nuget 
+
+https://www.nuget.org/packages/Ecv2DotNet/
+
 ## Features
 
 - **ECv2SigningOnly Protocol Support**: Validates signatures using Google's ECv2SigningOnly protocol
