@@ -30,16 +30,16 @@ var builder = Host.CreateDefaultBuilder(args);
 builder.ConfigureServices(services =>
 {
     // Basic setup with your issuer ID
-    services.AddEcv2Validation("1388000000022025937");
+    services.AddEcv2Validation("1296031581681466393");
     
     // Or with custom public key URL
     services.AddEcv2Validation(
-        issuerId: "1388000000022025937",
+        issuerId: "1296031581681466393",
         publicKeyUrl: "https://custom.google.keys.url"
     );
     
     // Or with additional configuration
-    services.AddEcv2Validation("1388000000022025937", options =>
+    services.AddEcv2Validation("1296031581681466393", options =>
     {
         options.PublicKeyUrl = "https://pay.google.com/gp/m/issuer/keys";
     });
@@ -113,7 +113,7 @@ using Microsoft.Extensions.Options;
 // Create configuration
 var options = new Ecv2Options
 {
-    IssuerId = "1388000000022025937",
+    IssuerId = "1296031581681466393",
     PublicKeyUrl = "https://pay.google.com/gp/m/issuer/keys"
 };
 
@@ -130,15 +130,15 @@ var validator = new Ecv2Validator(httpClient, Options.Create(options), logger);
 // Validate signature
 string signatureJson = """
 {
-  "signature": "MEUCIQCJi26vl+ak17dsHDbZZnRZxm51duUAPiYLwOIr9rVvAAIgGUfR18gpKTq1+Msav0vPrWvC6x9dDRwWFX/b85+jE1k=",
+  "signature": "XEUCIQCJi26vl+ak17dsHDbZZnRZxm51duUAPiYLwOIr9rVvAAIgGUfR18gpKTq1+Msav0vPrWvC6x9dDRwWFX/b85+jE1k=",
   "intermediateSigningKey": {
-    "signedKey": "{\"keyValue\":\"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEVsEtOdPMaE+DJDzuCJaO7EJXaHor4Kyklp411iwfBa+5TmdbiEWUXzewA79H0PXjdyRMhKBY99+sh056JB75LQ==\",\"keyExpiration\":\"1754778096000\"}",
+    "signedKey": "{\"keyValue\":\"XFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEVsEtOdPMaE+DJDzuCJaO7EJXaHor4Kyklp411iwfBa+5TmdbiEWUXzewA79H0PXjdyRMhKBY99+sh056JB75LQ==\",\"keyExpiration\":\"1754778096000\"}",
     "signatures": [
       "MEUCIC29Ju3bt9kklbbA9QAJZW0hh2zecbHDzGo4hF1zRi1zAiEA6e201l1TEl85Row6XHybfDoewIKC4vYpnrlmUT9WbrE="
     ]
   },
   "protocolVersion": "ECv2SigningOnly",
-  "signedMessage": "{\"classId\":\"1388000000022025937.LOYALTY_CLASS_dada6069-0799-44ec-a38d-c482484902e1\",\"objectId\":\"3388000000022025937.LOYALTY_OBJECT_xxxxxxxxxxxxx\",\"eventType\":\"save\",\"expTimeMillis\":1754114831806,\"count\":1,\"nonce\":\"40a8e5af-5b7f-4ea4-b152-63d96858550e\"}"
+  "signedMessage": "{\"classId\":\"1296031581681466393.LOYALTY_CLASS_dada6069-0799-44ec-a38d-c482484902e1\",\"objectId\":\"1296031581681466393.LOYALTY_OBJECT_xxxxxxxxxxxxx\",\"eventType\":\"save\",\"expTimeMillis\":1754114831806,\"count\":1,\"nonce\":\"40a8e5af-5b7f-4ea4-b152-63d96858550e\"}"
 }
 """;
 
@@ -147,6 +147,17 @@ Console.WriteLine($"Signature is valid: {isValid}");
 ```
 
 ## Configuration
+
+If you include an ILoggerFactory in your DI setup, the library will log detailed information about the validation process. This can help you debug issues with signature validation.
+
+Example: 
+```
+fail: Ecv2DotNet.Ecv2Validator[0]
+      Expiry date is in the past: 08/02/2025 06:07:11 +00:00
+fail: Ecv2DotNet.Ecv2Validator[0]
+      Signed message has expired: 1754114831806
+Signature valid: False
+```
 
 ### Ecv2Options
 
@@ -184,7 +195,7 @@ public class Ecv2Options
 ```json
 {
   "GooglePay": {
-    "IssuerId": "1388000000022025937",
+    "IssuerId": "1296031581681466393",
     "PublicKeyUrl": "https://pay.google.com/gp/m/issuer/keys"
   }
 }
